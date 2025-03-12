@@ -5,6 +5,9 @@ MOVEMENTS = {
     "WEST": (-1, 0),
 }
 
+RIGHT_TURN = {"NORTH": "EAST", "EAST": "SOUTH", "SOUTH": "WEST", "WEST": "NORTH"}
+LEFT_TURN = {"NORTH": "WEST", "WEST": "SOUTH", "SOUTH": "EAST", "EAST": "NORTH"}
+
 
 class Robot:
     def __init__(self):
@@ -17,11 +20,23 @@ class Robot:
         self.x += step_x
         self.y += step_y
 
+    def right(self):
+        self.direction = RIGHT_TURN[self.direction]
+
+    def left(self):
+        self.direction = LEFT_TURN[self.direction]
+
+    def report(self):
+        return f"{self.x},{self.y},{self.direction}"
+
 
 if __name__ == "__main__":
     r = Robot()
     r.x = 1
     r.y = 2
     r.direction = "NORTH"
+    r.left()
+    r.left()
+    r.right()
     r.move()
-    print(r.x, r.y)
+    print(r.report())
