@@ -1,7 +1,3 @@
-from robot import Robot
-from table import Table
-
-
 def handle_input_file(filename, robot):
     commands = {
         "MOVE": robot.move,
@@ -24,8 +20,3 @@ def handle_input_file(filename, robot):
                 action()
             else:
                 print(f"Invalid command: {command}")
-
-
-table = Table()
-robot = Robot(table)
-handle_input_file("input.txt", robot)
