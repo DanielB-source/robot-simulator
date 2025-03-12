@@ -12,14 +12,5 @@ class Table:
     def is_valid_direction(self, direction):
         return direction in DIRECTIONS
 
-
-if __name__ == "__main__":
-    t = Table()
-    print(t.is_in_bound(2, 3))
-    print(t.is_in_bound(22, 51))
-    print(t.is_valid_direction("NORTH"))
-    print(t.is_valid_direction("SOUTH"))
-    print(t.is_valid_direction("EAST"))
-    print(t.is_valid_direction("WEST"))
-    print(t.is_valid_direction("norr"))
-    print(t.is_valid_direction("Söder"))
+    def is_valid_placement(self, x, y, direction):
+        return self.is_in_bound(x, y) and self.is_valid_direction(direction)

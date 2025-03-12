@@ -19,9 +19,10 @@ class Robot:
         self.table = table
 
     def place(self, x, y, direction):
-        self.x = x
-        self.y = y
-        self.direction = direction
+        if self.table.is_valid_placement(x, y, direction):
+            self.x = x
+            self.y = y
+            self.direction = direction
 
     def move(self):
         step_x, step_y = MOVEMENTS[self.direction]
@@ -44,11 +45,7 @@ class Robot:
 if __name__ == "__main__":
     t = Table()
     r = Robot(t)
-    r.place(2, 2, "NORTH")
-    r.move()
-    r.move()
-    r.left()
+    r.place(10, 20, "SOUTH")
     print(r.report())
-    r.place(10, 12, "NORTH")
-    r.move()
+    r.place(1, 2, "SOUTH")
     print(r.report())
