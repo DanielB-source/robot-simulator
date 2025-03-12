@@ -7,7 +7,7 @@ def handle_input_file(filename, robot):
         "MOVE": robot.move,
         "LEFT": robot.left,
         "RIGHT": robot.right,
-        "REPORT": lambda: print(robot.report()),
+        "REPORT": lambda: robot.report() and print(robot.report()),
     }
 
     with open(filename, "r") as file:
