@@ -1,3 +1,6 @@
+DIRECTIONS = ["NORTH", "SOUTH", "EAST", "WEST"]
+
+
 class Table:
     def __init__(self, width=5, height=5):
         self.width = width
@@ -7,12 +10,7 @@ class Table:
         return 0 <= x < self.width and 0 <= y < self.height
 
     def is_valid_direction(self, direction):
-        return (
-            direction == "NORTH"
-            or direction == "SOUTH"
-            or direction == "EAST"
-            or direction == "WEST"
-        )
+        return direction in DIRECTIONS
 
 
 if __name__ == "__main__":
