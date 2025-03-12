@@ -18,6 +18,11 @@ class Robot:
         self.direction = None
         self.table = table
 
+    def place(self, x, y, direction):
+        self.x = x
+        self.y = y
+        self.direction = direction
+
     def move(self):
         step_x, step_y = MOVEMENTS[self.direction]
         tmp_x = self.x + step_x
@@ -25,11 +30,6 @@ class Robot:
         if self.table.is_in_bound(tmp_x, tmp_y):
             self.x = tmp_x
             self.y = tmp_y
-
-    def place(self, x, y, direction):
-        self.x = x
-        self.y = y
-        self.direction = direction
 
     def right(self):
         self.direction = RIGHT_TURN[self.direction]
