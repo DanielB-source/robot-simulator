@@ -1,5 +1,3 @@
-from table import Table
-
 MOVEMENTS = {
     "NORTH": (0, 1),
     "SOUTH": (0, -1),
@@ -55,18 +53,3 @@ class Robot:
     @requires_placement
     def report(self):
         return f"{self.x},{self.y},{self.direction}"
-
-
-if __name__ == "__main__":
-    t = Table()
-    r = Robot(t)
-    r.x = 1
-    r.y = 2
-    r.direction = "NORTH"
-    r.move()
-    print(r.report())
-    t = Table()
-    r = Robot(t)
-    r.place(1, 2, "NORTH")
-    r.move()
-    print(r.report())
