@@ -11,6 +11,15 @@ RIGHT_TURN = {"NORTH": "EAST", "EAST": "SOUTH", "SOUTH": "WEST", "WEST": "NORTH"
 LEFT_TURN = {"NORTH": "WEST", "WEST": "SOUTH", "SOUTH": "EAST", "EAST": "NORTH"}
 
 
+def requires_placement(method):
+    def wrapper(self):
+        if not self.is_placed:
+            return
+        return method(self)
+
+    return wrapper
+
+
 class Robot:
     def __init__(self, table=None):
         self.x = None
@@ -26,9 +35,8 @@ class Robot:
             self.direction = direction
             self.is_placed = True
 
+    @requires_placement
     def move(self):
-        if not self.is_placed:
-            return
         step_x, step_y = MOVEMENTS[self.direction]
         tmp_x = self.x + step_x
         tmp_y = self.y + step_y
@@ -36,19 +44,16 @@ class Robot:
             self.x = tmp_x
             self.y = tmp_y
 
+    @requires_placement
     def right(self):
-        if not self.is_placed:
-            return
         self.direction = RIGHT_TURN[self.direction]
 
+    @requires_placement
     def left(self):
-        if not self.is_placed:
-            return
         self.direction = LEFT_TURN[self.direction]
 
+    @requires_placement
     def report(self):
-        if not self.is_placed:
-            return
         return f"{self.x},{self.y},{self.direction}"
 
 
@@ -58,5 +63,10 @@ if __name__ == "__main__":
     r.x = 1
     r.y = 2
     r.direction = "NORTH"
+    r.move()
+    print(r.report())
+    t = Table()
+    r = Robot(t)
+    r.place(1, 2, "NORTH")
     r.move()
     print(r.report())
