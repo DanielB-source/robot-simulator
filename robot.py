@@ -1,3 +1,5 @@
+from table import Table
+
 MOVEMENTS = {
     "NORTH": (0, 1),
     "SOUTH": (0, -1),
@@ -10,15 +12,19 @@ LEFT_TURN = {"NORTH": "WEST", "WEST": "SOUTH", "SOUTH": "EAST", "EAST": "NORTH"}
 
 
 class Robot:
-    def __init__(self):
+    def __init__(self, table=None):
         self.x = None
         self.y = None
         self.direction = None
+        self.table = table
 
     def move(self):
         step_x, step_y = MOVEMENTS[self.direction]
-        self.x += step_x
-        self.y += step_y
+        tmp_x = self.x + step_x
+        tmp_y = self.y + step_y
+        if self.table.is_in_bound(tmp_x, tmp_y):
+            self.x = tmp_x
+            self.y = tmp_y
 
     def place(self, x, y, direction):
         self.x = x
@@ -36,10 +42,13 @@ class Robot:
 
 
 if __name__ == "__main__":
-    r = Robot()
-    r.place(2, 4, "SOUTH")
+    t = Table()
+    r = Robot(t)
+    r.place(2, 2, "NORTH")
+    r.move()
+    r.move()
     r.left()
-    r.left()
-    r.right()
+    print(r.report())
+    r.place(10, 12, "NORTH")
     r.move()
     print(r.report())
