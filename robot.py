@@ -20,6 +20,11 @@ class Robot:
         self.x += step_x
         self.y += step_y
 
+    def place(self, x, y, direction):
+        self.x = x
+        self.y = y
+        self.direction = direction
+
     def right(self):
         self.direction = RIGHT_TURN[self.direction]
 
@@ -32,9 +37,7 @@ class Robot:
 
 if __name__ == "__main__":
     r = Robot()
-    r.x = 1
-    r.y = 2
-    r.direction = "NORTH"
+    r.place(2, 4, "SOUTH")
     r.left()
     r.left()
     r.right()
